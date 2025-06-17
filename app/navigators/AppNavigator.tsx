@@ -32,6 +32,8 @@ export type AppStackParamList = {
   Welcome: undefined
   Login: undefined
   Demo: NavigatorScreenParams<DemoTabParamList>
+  RepoList: undefined
+  RepoDetail: { repoName: string }
   // 🔥 Your screens go here
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
@@ -52,10 +54,6 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
   const {
-    authenticationStore: { isAuthenticated },
-  } = useStores()
-
-  const {
     theme: { colors },
   } = useAppTheme()
 
@@ -68,19 +66,15 @@ const AppStack = observer(function AppStack() {
           backgroundColor: colors.background,
         },
       }}
-      initialRouteName={isAuthenticated ? "Welcome" : "Login"}
+      initialRouteName="RepoList"
     >
-      {isAuthenticated ? (
-        <>
-          <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+      <Stack.Screen name="RepoList" component={Screens.RepoListScreen} />
+      <Stack.Screen name="RepoDetail" component={Screens.RepoDetailScreen} />
 
-          <Stack.Screen name="Demo" component={DemoNavigator} />
-        </>
-      ) : (
-        <>
-          <Stack.Screen name="Login" component={Screens.LoginScreen} />
-        </>
-      )}
+      {/* Keep existing screens for potential future use */}
+      <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+      <Stack.Screen name="Login" component={Screens.LoginScreen} />
+      <Stack.Screen name="Demo" component={DemoNavigator} />
 
       {/** 🔥 Your screens go here */}
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}

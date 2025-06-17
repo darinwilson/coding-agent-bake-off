@@ -1,4 +1,6 @@
 export * from "./RootStore"
+export * from "./Repository"
+export * from "./RepositoryStore"
 export * from "./helpers/getRootStore"
 export * from "./helpers/useStores"
 export * from "./helpers/setupRootStore"
